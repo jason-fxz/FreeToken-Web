@@ -304,16 +304,17 @@
     </main>
 
     <script>
-      // ── edit these two ─────────────────────────────────────────────
+      // ── edit these ─────────────────────────────────────────────
       const GH_ORG    = "jason-fxz";
       const GH_REPO   = "FreeToken-Web";
+      const BETA_TAG  = "beta";   // rolling release tag: assets are clobbered per build, URL never changes
       // ───────────────────────────────────────────────────────────
 
-      const REL       = `https://github.com/${GH_ORG}/${GH_REPO}/releases`;
-      const LATEST    = `${REL}/latest`;
-      const LATEST_DL = `${REL}/latest/download`;
+      const REL = `https://github.com/${GH_ORG}/${GH_REPO}/releases`;
+      // Download by fixed tag (works for prereleases too), not the "latest release" redirect
+      const DL  = `${REL}/download/${BETA_TAG}`;
 
-      // Desktop full package (bundles the whl) — rename to a fixed filename on upload so the latest link stays stable
+      // Desktop full package (bundles the whl) — uploaded under a fixed filename so the URL stays stable
       const PLATFORMS = [
         { key: "win", label: "Windows", file: "FreeToken-Setup-win-x64.exe" },
         { key: "deb", label: "Linux · .deb", file: "freetoken-desktop-amd64.deb" },
@@ -336,7 +337,7 @@
 
       // Platform cards (shown when expanded; platform names are proper nouns, left untranslated)
       document.getElementById("cards").innerHTML = PLATFORMS.map(p => `
-        <a class="card" href="${LATEST_DL}/${p.file}">
+        <a class="card" href="${DL}/${p.file}">
           <span class="os-name">${p.label}</span>
           <span class="file">${p.file}</span>
         </a>`).join("");
@@ -384,7 +385,7 @@
         const primary = document.getElementById("primary");
         if (current) {
           primary.classList.remove("is-disabled");
-          primary.setAttribute("href", `${LATEST_DL}/${current.file}`);
+          primary.setAttribute("href", `${DL}/${current.file}`);
           primary.innerHTML = `${t.download} <span class="os">${current.label}</span>`;
         } else {
           primary.classList.add("is-disabled");
@@ -393,7 +394,7 @@
         }
         document.getElementById("tagline").textContent = t.tagline;
         document.getElementById("ver").innerHTML =
-          `<a href="${LATEST}" style="color:inherit">${t.releases} ↗</a>`;
+          `<a href="${REL}" style="color:inherit">${t.releases} ↗</a>`;
         document.querySelectorAll(".lang-btn").forEach(b =>
           b.classList.toggle("active", b.dataset.lang === lang));
       }
