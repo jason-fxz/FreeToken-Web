@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FreeToken — Download</title>
+    <meta name="description" content="Download FreeToken — the local-LLM runtime and desktop control panel. Local LLMs, under your control." />
+    <meta property="og:title" content="FreeToken — Download" />
+    <meta property="og:description" content="Local LLMs, under your control." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" href="assets/icon-128.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #21252b;
+        --surface: #282c34;
+        --surface-2: #2f343e;
+        --surface-3: #3a3f4b;
+        --border: rgba(255, 255, 255, 0.07);
+        --border-2: #3a3f4b;
+        --text: #d7dae0;
+        --text-2: #abb2bf;
+        --text-3: #7f848e;
+        --text-4: #5c6370;
+        --accent: #61afef;
+        --success: #98c379;
+        --warn: #e5c07b;
+        --danger: #e06c75;
+        --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", "Noto Sans SC", monospace;
+        --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei",
+                ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; letter-spacing: 0; }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 26% 20%, rgba(97, 175, 239, 0.13), transparent 34rem),
+          radial-gradient(circle at 74% 18%, rgba(86, 182, 194, 0.08), transparent 30rem),
+          var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .window {
+        width: min(760px, 100%);
+        overflow: hidden;
+        border: 1px solid var(--border-2);
+        border-radius: 10px;
+        background: var(--bg);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+      }
+
+      .titlebar {
+        height: 38px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 0 14px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-3);
+        font-size: 11px;
+      }
+
+      .dots { display: flex; gap: 7px; }
+      .dot { width: 11px; height: 11px; border-radius: 999px; }
+      .red { background: var(--danger); }
+      .yellow { background: var(--warn); }
+      .green { background: var(--success); }
+
+      .title {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        letter-spacing: 0.04em;
+      }
+      .title::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 2px;
+        background: var(--accent);
+      }
+
+      .lang { justify-self: end; display: inline-flex; gap: 2px; }
+      .lang-btn {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: var(--text-4);
+        font-size: 11px;
+        line-height: 1;
+        padding: 4px 7px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: color .15s ease, background .15s ease;
+      }
+      .lang-btn:hover { color: var(--text-2); }
+      .lang-btn.active {
+        color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+      }
+
+      .content {
+        min-height: 520px;
+        display: grid;
+        place-items: center;
+        padding: 80px 36px 72px;
+        text-align: center;
+      }
+
+      .mark {
+        width: 92px;
+        height: 92px;
+        margin: 0 auto 30px;
+      }
+      .mark img { width: 100%; height: 100%; display: block; }
+
+      h1 {
+        margin: 0;
+        color: #f0f2f5;
+        font-size: clamp(38px, 6.4vw, 64px);
+        font-weight: 700;
+        line-height: 0.98;
+      }
+
+      .lead {
+        width: min(560px, 100%);
+        margin: 20px auto 0;
+        color: var(--text-2);
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 40px;
+      }
+
+      .button {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 18px;
+        border: 1px solid var(--border-2);
+        border-radius: 8px;
+        background: var(--surface-2);
+        color: var(--text);
+        font-size: 13.5px;
+        font-weight: 600;
+        transition: filter .15s ease, border-color .15s ease;
+      }
+      .button:hover { filter: brightness(1.12); }
+      .button.primary {
+        min-height: 56px;
+        padding: 0 36px;
+        border-radius: 11px;
+        font-size: 16px;
+        border-color: color-mix(in srgb, var(--accent) 42%, var(--border-2));
+        background: color-mix(in srgb, var(--accent) 13%, var(--surface-2));
+        color: #8ecbff;
+      }
+      .button .os { color: var(--text-3); font-weight: 500; }
+      .button.primary .os { color: color-mix(in srgb, #8ecbff 70%, transparent); }
+      .button.is-disabled {
+        cursor: default;
+        pointer-events: none;
+        color: var(--text-3);
+        border-color: var(--border-2);
+        background: var(--surface);
+      }
+
+      /* ── download-specific, built on the same tokens ── */
+      .disclosure {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        margin: 52px 0 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--text-4);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition: color .15s ease;
+      }
+      .disclosure:hover { color: var(--text-2); }
+      .disclosure .chev { font-size: 9px; transition: transform .2s ease; }
+      .disclosure[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 100%;
+        margin-top: 16px;
+      }
+      /* display:grid overrides the UA display:none from [hidden] — declare it explicitly */
+      .cards[hidden] { display: none; }
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 14px 16px;
+        text-align: left;
+        border: 1px solid var(--border-2);
+        border-radius: 8px;
+        background: var(--surface);
+        transition: border-color .15s ease, background .15s ease;
+      }
+      .card:hover {
+        border-color: color-mix(in srgb, var(--accent) 40%, var(--border-2));
+        background: var(--surface-2);
+      }
+      .card .os-name { font-size: 14px; font-weight: 600; color: var(--text); }
+      .card .file { font-family: var(--mono); font-size: 11px; color: var(--text-3); }
+
+      .footer {
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0 18px;
+        border-top: 1px solid var(--border);
+        color: var(--text-4);
+        font-size: 11px;
+      }
+      .footer a { color: var(--text-3); }
+
+      @media (max-width: 560px) {
+        body { padding: 14px; }
+        .titlebar { grid-template-columns: auto 1fr auto; padding: 0 10px; }
+        .title { justify-self: center; max-width: 138px; overflow: hidden; white-space: nowrap; }
+        .content { padding: 44px 18px 30px; }
+        .actions { align-items: stretch; flex-direction: column; }
+        .button { width: 100%; }
+        .cards { grid-template-columns: 1fr; }
+        .footer { align-items: flex-start; height: auto; flex-direction: column; padding: 14px 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="window" aria-label="FreeToken download">
+      <div class="titlebar">
+        <div class="dots" aria-hidden="true">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="title">FreeToken</div>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="zh">中文</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+
+      <section class="content">
+        <div style="width: 100%; max-width: 620px;">
+          <div class="mark">
+            <img src="assets/icon.png" alt="FreeToken" width="92" height="92" />
+          </div>
+          <h1>FreeToken</h1>
+          <p class="lead" id="lead">Local LLMs, under your control.</p>
+
+          <div class="actions">
+            <a id="primary" class="button primary" href="#">Download</a>
+          </div>
+
+          <button type="button" class="disclosure" id="platforms-toggle"
+                  aria-expanded="false" aria-controls="cards">
+            <span id="platforms-label">All platforms</span>
+            <span class="chev" aria-hidden="true">▾</span>
+          </button>
+          <div class="cards" id="cards" hidden></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span id="tagline">FreeToken · Local LLMs, under your control.</span>
+        <span id="ver">Releases</span>
+      </footer>
+    </main>
+
+    <script>
+      // ── edit these two ─────────────────────────────────────────────
+      const GH_ORG    = "jason-fxz";
+      const GH_REPO   = "FreeToken-Web";
+      // ───────────────────────────────────────────────────────────
+
+      const REL       = `https://github.com/${GH_ORG}/${GH_REPO}/releases`;
+      const LATEST    = `${REL}/latest`;
+      const LATEST_DL = `${REL}/latest/download`;
+
+      // Desktop full package (bundles the whl) — rename to a fixed filename on upload so the latest link stays stable
+      const PLATFORMS = [
+        { key: "win", label: "Windows", file: "FreeToken-Setup-win-x64.exe" },
+        { key: "deb", label: "Linux · .deb", file: "freetoken-desktop-amd64.deb" },
+      ];
+
+      // Detect the current OS -> return its platform; anything but Win/Linux -> null (unsupported).
+      // Append ?os=win|deb|none to force a state (handy for local preview).
+      function detectPlatform() {
+        const forced = new URLSearchParams(location.search).get("os");
+        if (forced === "none") return null;
+        if (forced === "win" || forced === "deb")
+          return PLATFORMS.find(p => p.key === forced) || null;
+        const ua = navigator.userAgent || "";
+        if (/Android/i.test(ua)) return null;                       // mobile
+        if (/Windows|Win32|Win64/i.test(ua)) return PLATFORMS.find(p => p.key === "win");
+        if (/Linux|X11/i.test(ua))  return PLATFORMS.find(p => p.key === "deb"); // Android already excluded above
+        return null;                                                // macOS / iOS / others
+      }
+      const current = detectPlatform();
+
+      // Platform cards (shown when expanded; platform names are proper nouns, left untranslated)
+      document.getElementById("cards").innerHTML = PLATFORMS.map(p => `
+        <a class="card" href="${LATEST_DL}/${p.file}">
+          <span class="os-name">${p.label}</span>
+          <span class="file">${p.file}</span>
+        </a>`).join("");
+
+      // ── i18n(en / zh_CN)────────────────────────────────────────
+      const I18N = {
+        zh: {
+          htmlLang: "zh-CN",
+          title:     "FreeToken — 下载",
+          lead:      "本地大模型,尽在掌控。",
+          download:  "下载 FreeToken",
+          unsupported: "暂不支持当前系统",
+          platforms: "所有平台",
+          tagline:   "FreeToken · 本地大模型,尽在掌控。",
+          releases:  "全部版本",
+        },
+        en: {
+          htmlLang: "en",
+          title:     "FreeToken — Download",
+          lead:      "Local LLMs, under your control.",
+          download:  "Download FreeToken",
+          unsupported: "Not supported on your OS yet",
+          platforms: "All platforms",
+          tagline:   "FreeToken · Local LLMs, under your control.",
+          releases:  "Releases",
+        },
+      };
+
+      function pickLang() {
+        try {
+          const saved = localStorage.getItem("ft-lang");
+          if (saved === "zh" || saved === "en") return saved;
+        } catch (_) {}
+        return /^zh/i.test(navigator.language || "") ? "zh" : "en";
+      }
+
+      let lang = pickLang();
+
+      function applyLang() {
+        const t = I18N[lang];
+        document.documentElement.lang = t.htmlLang;
+        document.title = t.title;
+        document.getElementById("lead").textContent = t.lead;
+        document.getElementById("platforms-label").textContent = t.platforms;
+        const primary = document.getElementById("primary");
+        if (current) {
+          primary.classList.remove("is-disabled");
+          primary.setAttribute("href", `${LATEST_DL}/${current.file}`);
+          primary.innerHTML = `${t.download} <span class="os">${current.label}</span>`;
+        } else {
+          primary.classList.add("is-disabled");
+          primary.removeAttribute("href");
+          primary.textContent = t.unsupported;
+        }
+        document.getElementById("tagline").textContent = t.tagline;
+        document.getElementById("ver").innerHTML =
+          `<a href="${LATEST}" style="color:inherit">${t.releases} ↗</a>`;
+        document.querySelectorAll(".lang-btn").forEach(b =>
+          b.classList.toggle("active", b.dataset.lang === lang));
+      }
+
+      document.querySelectorAll(".lang-btn").forEach(b =>
+        b.addEventListener("click", () => {
+          lang = b.dataset.lang;
+          try { localStorage.setItem("ft-lang", lang); } catch (_) {}
+          applyLang();
+        }));
+
+      // "All platforms" disclosure: collapsed by default on supported OSes; expanded when unsupported,
+      // so the user sees the downloadable platforms right away. Click toggles as usual.
+      const platformsToggle = document.getElementById("platforms-toggle");
+      const cardsEl = document.getElementById("cards");
+      function setPlatformsOpen(open) {
+        platformsToggle.setAttribute("aria-expanded", String(open));
+        cardsEl.hidden = !open;
+      }
+      setPlatformsOpen(!current);
+      platformsToggle.addEventListener("click", () => {
+        setPlatformsOpen(platformsToggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      applyLang();
+    </script>
+  </body>
+</html>

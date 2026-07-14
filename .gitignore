@@ -1,0 +1,10 @@
+# This repo ships no build artifacts, only web source. Artifacts go to Releases.
+*.whl
+*.exe
+*.deb
+*.dmg
+*.zip
+*.tar.*
+dist/
+node_modules/
+.DS_Store
