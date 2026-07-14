@@ -12,10 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" />
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" />
     <style>
       :root {
         color-scheme: dark;
+        /* reserve the scrollbar gutter on both sides so it appearing/disappearing
+           (e.g. when "all platforms" expands) never shifts the centered layout */
+        scrollbar-gutter: stable both-edges;
         --bg: #21252b;
         --surface: #282c34;
         --surface-2: #2f343e;
@@ -31,7 +34,7 @@
         --warn: #e5c07b;
         --danger: #e06c75;
         --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", "Noto Sans SC", monospace;
-        --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei",
+        --sans: "Inter", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei",
                 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
       }
 
@@ -44,14 +47,34 @@
         display: grid;
         place-items: center;
         padding: 24px;
-        background:
-          radial-gradient(circle at 26% 20%, rgba(97, 175, 239, 0.13), transparent 34rem),
-          radial-gradient(circle at 74% 18%, rgba(86, 182, 194, 0.08), transparent 30rem),
-          var(--bg);
+        background: var(--bg);
         color: var(--text);
         font-family: var(--sans);
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
+      }
+
+      /* ambient glow on a fixed layer behind everything, slowly breathing brighter/dimmer.
+         opacity-only animation → GPU-composited, no layout/text impact. */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 50% 44%, rgba(97, 175, 239, 0.10), transparent 55%),
+          radial-gradient(circle at 26% 20%, rgba(97, 175, 239, 0.12), transparent 34rem),
+          radial-gradient(circle at 74% 18%, rgba(86, 182, 194, 0.07), transparent 30rem);
+        animation: bg-breathe 6s ease-in-out infinite;
+      }
+      /* token.ai-style breathe — slow scale + brightness pulse (their colors swapped for ours) */
+      @keyframes bg-breathe {
+        0%, 100% { opacity: .55; transform: scale(1); }
+        50%      { opacity: 1;   transform: scale(1.08); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body::before { animation: none; }
       }
 
       a { color: inherit; text-decoration: none; }
@@ -134,8 +157,9 @@
         margin: 0;
         color: #f0f2f5;
         font-size: clamp(38px, 6.4vw, 64px);
-        font-weight: 700;
+        font-weight: 600;
         line-height: 0.98;
+        letter-spacing: -0.025em;   /* Inter reads best with tight negative tracking at display size */
       }
 
       .lead {
@@ -199,6 +223,75 @@
         background: var(--surface);
       }
 
+      /* ── split download button: main = default format, chevron = "other versions" ── */
+      .dl-split { position: relative; display: inline-flex; align-items: stretch; }
+      /* one seamless button: main keeps left corners, drops its right border/radius so the
+         two halves meet flush with a single divider (the chevron's left border). */
+      .dl-split.has-more #primary {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 0;
+      }
+      .dl-more {
+        min-height: 56px;
+        border-left: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border-2));
+        cursor: pointer;
+      }
+      /* square the inner edge + slim it down — both must beat .button.primary
+         (0,2,0), which otherwise forces radius 11px, padding 0 36px, font 16px. */
+      .dl-split.has-more .dl-more {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        padding: 0 13px;
+        font-size: 11px;
+      }
+      .dl-more[hidden] { display: none; }
+      .dl-more .chev { display: inline-block; transition: transform .2s ease; }
+      .dl-more[aria-expanded="true"] .chev { transform: rotate(180deg); }
+      /* no harsh default outline on mouse click; keep an accessible ring for keyboard focus */
+      .dl-split .button:focus { outline: none; }
+      .dl-split .button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      /* Full width of the split button (its left edge → the chevron's right edge), dropping
+         straight down like the button extended. Grows from the top when opened. */
+      .dl-menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 6px;
+        border: 1px solid var(--border-2);
+        border-radius: 11px;
+        background: var(--surface);
+        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.44);
+        text-align: left;
+        transform-origin: top center;
+        transform: translateY(-6px) scaleY(.97);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s;
+      }
+      .dl-menu.open {
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity .16s ease, transform .16s ease, visibility 0s;
+      }
+      .dl-menu-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 9px 12px;
+        border-radius: 7px;
+        transition: background .15s ease;
+      }
+      .dl-menu-item:hover { background: var(--surface-2); }
+      .dl-menu-item .os-name { font-size: 13.5px; font-weight: 600; color: var(--text); }
+      .dl-menu-item .file { font-family: var(--mono); font-size: 11px; color: var(--text-3); word-break: break-all; }
+
       /* ── download-specific, built on the same tokens ── */
       .disclosure {
         appearance: none;
@@ -219,15 +312,46 @@
       .disclosure .chev { font-size: 9px; transition: transform .2s ease; }
       .disclosure[aria-expanded="true"] .chev { transform: rotate(180deg); }
 
+      /* Animated disclosure: the 0fr→1fr grid-row trick transitions to the content's
+         natural height (no JS measuring). The inner element clips during the slide. */
       .cards {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-rows: 0fr;
         width: 100%;
-        margin-top: 16px;
+        margin-top: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: grid-template-rows .3s ease, opacity .22s ease,
+                    margin-top .3s ease, visibility 0s linear .3s;
       }
-      /* display:grid overrides the UA display:none from [hidden] — declare it explicitly */
-      .cards[hidden] { display: none; }
+      .cards.open {
+        grid-template-rows: 1fr;
+        margin-top: 16px;
+        opacity: 1;
+        visibility: visible;
+        transition: grid-template-rows .3s ease, opacity .22s ease .04s,
+                    margin-top .3s ease, visibility 0s;
+      }
+      .cards-inner {
+        overflow: hidden;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        text-align: left;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .cards { transition: opacity .01s, visibility 0s; }
+      }
+      .dl-label {
+        display: block;
+        margin: 0 0 8px 2px;
+        color: var(--text-4);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .dl-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
       .card {
         display: flex;
         flex-direction: column;
@@ -244,7 +368,7 @@
         background: var(--surface-2);
       }
       .card .os-name { font-size: 14px; font-weight: 600; color: var(--text); }
-      .card .file { font-family: var(--mono); font-size: 11px; color: var(--text-3); }
+      .card .file { font-family: var(--mono); font-size: 11px; color: var(--text-3); word-break: break-all; }
 
       .footer {
         height: 44px;
@@ -266,7 +390,10 @@
         .content { padding: 44px 18px 30px; }
         .actions { align-items: stretch; flex-direction: column; }
         .button { width: 100%; }
-        .cards { grid-template-columns: 1fr; }
+        .dl-split { width: 100%; }
+        .dl-split .button { width: auto; }
+        .dl-split #primary { flex: 1; }
+        .dl-row { grid-template-columns: 1fr; }
         .footer { align-items: flex-start; height: auto; flex-direction: column; padding: 14px 16px; }
       }
     </style>
@@ -295,7 +422,14 @@
           <p class="lead" id="lead">Local LLMs, under your control.</p>
 
           <div class="actions">
-            <a id="primary" class="button primary" href="#">Download</a>
+            <div class="dl-split" id="dl-split">
+              <a id="primary" class="button primary" href="#">Download</a>
+              <button type="button" id="primary-more" class="button primary dl-more"
+                      aria-haspopup="menu" aria-expanded="false" hidden>
+                <span class="chev" aria-hidden="true">▾</span>
+              </button>
+              <div class="dl-menu" id="dl-menu" role="menu"></div>
+            </div>
           </div>
           <a class="version" id="version" href="#"></a>
 
@@ -304,7 +438,9 @@
             <span id="platforms-label">All platforms</span>
             <span class="chev" aria-hidden="true">▾</span>
           </button>
-          <div class="cards" id="cards" hidden></div>
+          <div class="cards" id="cards">
+            <div class="cards-inner" id="cards-inner"></div>
+          </div>
         </div>
       </section>
 
@@ -326,19 +462,25 @@
       // Download by fixed tag (works for prereleases too), not the "latest release" redirect
       const DL  = `${REL}/download/${BETA_TAG}`;
 
-      // Desktop full package (bundles the whl) — uploaded under a fixed filename so the URL stays stable
+      // Desktop full package (bundles the whl) — uploaded under fixed filenames so the URLs stay stable.
+      // Linux ships three formats; the browser can't tell the distro (UA is a generic "X11; Linux"),
+      // so we default Linux to .deb and let the user pick Arch / AppImage from "All platforms".
       const PLATFORMS = [
-        { key: "win", label: "Windows", file: "FreeToken-Setup-win-x64.exe" },
-        { key: "deb", label: "Linux · .deb", file: "freetoken-desktop-amd64.deb" },
+        { key: "win",      label: "Windows",         file: "FreeToken-Setup-win-x64.exe" },
+        { key: "deb",      label: "Debian / Ubuntu", file: "freetoken-desktop-amd64.deb" },
+        { key: "arch",     label: "Arch Linux",      file: "freetoken-desktop-x86_64.pkg.tar.zst" },
+        { key: "appimage", label: "AppImage",        file: "freetoken-desktop-x86_64.AppImage" },
       ];
+      const LINUX_KEYS = ["deb", "arch", "appimage"];
 
-      // Detect the current OS -> return its platform; anything but Win/Linux -> null (unsupported).
-      // Append ?os=win|deb|none to force a state (handy for local preview).
+      // Detect the current OS -> return its default download; anything but Win/Linux -> null.
+      // Linux is marked "linux" and defaults to .deb (Arch / AppImage live in the dropdown).
+      // Append ?os=win|linux|arch|appimage|none to force a state (handy for local preview).
       function detectPlatform() {
         const forced = new URLSearchParams(location.search).get("os");
         if (forced === "none") return null;
-        if (forced === "win" || forced === "deb")
-          return PLATFORMS.find(p => p.key === forced) || null;
+        if (forced === "linux") return PLATFORMS.find(p => p.key === "deb"); // Linux default = .deb
+        if (forced) return PLATFORMS.find(p => p.key === forced) || null;
         const ua = navigator.userAgent || "";
         if (/Android/i.test(ua)) return null;                       // mobile
         if (/Windows|Win32|Win64/i.test(ua)) return PLATFORMS.find(p => p.key === "win");
@@ -347,12 +489,47 @@
       }
       const current = detectPlatform();
 
-      // Platform cards (shown when expanded; platform names are proper nouns, left untranslated)
-      document.getElementById("cards").innerHTML = PLATFORMS.map(p => `
+      // Downloads grouped by OS so the Linux formats sit together (platform names are proper
+      // nouns, left untranslated). Windows is a single card; Linux shows its three formats.
+      const GROUPS = [
+        { name: "Windows", keys: ["win"] },
+        { name: "Linux",   keys: LINUX_KEYS },
+      ];
+      const byKey = k => PLATFORMS.find(p => p.key === k);
+      const cardHtml = p => `
         <a class="card" href="${DL}/${p.file}">
           <span class="os-name">${p.label}</span>
           <span class="file">${p.file}</span>
-        </a>`).join("");
+        </a>`;
+      document.getElementById("cards-inner").innerHTML = GROUPS.map(g => {
+        const items = g.keys.map(byKey).filter(Boolean);
+        // Fixed 3-column grid across every group so all cards are the same size
+        // (a group with fewer items just leaves the trailing columns empty).
+        return `
+          <div class="dl-group">
+            <span class="dl-label">${g.name}</span>
+            <div class="dl-row">${items.map(cardHtml).join("")}</div>
+          </div>`;
+      }).join("");
+
+      // Split-button dropdown: the other download formats within the current OS's group
+      // (e.g. on Linux the main button is .deb, the chevron opens Arch / AppImage).
+      const currentGroup = current ? GROUPS.find(g => g.keys.includes(current.key)) : null;
+      const alternatives = currentGroup
+        ? currentGroup.keys.map(byKey).filter(p => p && p.key !== current.key)
+        : [];
+      const dlSplit = document.getElementById("dl-split");
+      const moreBtn = document.getElementById("primary-more");
+      const dlMenu  = document.getElementById("dl-menu");
+      if (alternatives.length) {
+        dlSplit.classList.add("has-more");
+        moreBtn.hidden = false;
+        dlMenu.innerHTML = alternatives.map(p => `
+          <a class="dl-menu-item" role="menuitem" href="${DL}/${p.file}">
+            <span class="os-name">${p.label}</span>
+            <span class="file">${p.file}</span>
+          </a>`).join("");
+      }
 
       // Current version (bump VERSION above per release); links to the beta release page
       const verEl = document.getElementById("version");
@@ -367,6 +544,7 @@
           lead:      "本地大模型,尽在掌控。",
           download:  "下载 FreeToken",
           unsupported: "暂不支持当前系统",
+          moreVersions: "其他版本",
           platforms: "所有平台",
           tagline:   "FreeToken · 本地大模型,尽在掌控。",
           releases:  "全部版本",
@@ -377,6 +555,7 @@
           lead:      "Local LLMs, under your control.",
           download:  "Download FreeToken",
           unsupported: "Not supported on your OS yet",
+          moreVersions: "Other versions",
           platforms: "All platforms",
           tagline:   "FreeToken · Local LLMs, under your control.",
           releases:  "Releases",
@@ -409,6 +588,7 @@
           primary.removeAttribute("href");
           primary.textContent = t.unsupported;
         }
+        if (moreBtn) moreBtn.setAttribute("aria-label", t.moreVersions);
         document.getElementById("tagline").textContent = t.tagline;
         document.getElementById("ver").innerHTML =
           `<a href="${REL}" style="color:inherit">${t.releases} ↗</a>`;
@@ -423,13 +603,32 @@
           applyLang();
         }));
 
-      // "All platforms" disclosure: collapsed by default on supported OSes; expanded when unsupported,
-      // so the user sees the downloadable platforms right away. Click toggles as usual.
+      // Split-button dropdown: open/close the "other versions" menu, and dismiss it on an
+      // outside click or Escape. Only wired when the current OS actually has alternatives.
+      if (alternatives.length) {
+        const setMenuOpen = open => {
+          moreBtn.setAttribute("aria-expanded", String(open));
+          dlMenu.classList.toggle("open", open);
+        };
+        moreBtn.addEventListener("click", e => {
+          e.preventDefault();
+          setMenuOpen(moreBtn.getAttribute("aria-expanded") !== "true");
+        });
+        document.addEventListener("click", e => {
+          if (!dlSplit.contains(e.target)) setMenuOpen(false);
+        });
+        document.addEventListener("keydown", e => {
+          if (e.key === "Escape") setMenuOpen(false);
+        });
+      }
+
+      // "All platforms" disclosure: the full grouped list, collapsed by default; expanded only
+      // when the OS is unsupported (so a visitor still sees everything they can download).
       const platformsToggle = document.getElementById("platforms-toggle");
       const cardsEl = document.getElementById("cards");
       function setPlatformsOpen(open) {
         platformsToggle.setAttribute("aria-expanded", String(open));
-        cardsEl.hidden = !open;
+        cardsEl.classList.toggle("open", open);
       }
       setPlatformsOpen(!current);
       platformsToggle.addEventListener("click", () => {
