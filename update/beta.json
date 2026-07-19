@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0-beta.3",
+  "notes": "## What's Changed\n- in-app software update \n- some UI fixs",
+  "pub_date": "2026-07-19T08:40:05Z",
+  "platforms": {
+    "linux-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS3Via0FBTEtmdXBDdWh2Z3Nkc0tVemFnRG1aTDF4S1g3YndzSHZmQVF4ajAxOHNjSGVENUdza2EwNmJKTWlOeUhDQ3p2WFJVN0JWSk8yRWI5VUNiY3dNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NDUwMjc5CWZpbGU6ZnJlZXRva2VuLWRlc2t0b3AteDg2XzY0LkFwcEltYWdlClhENTE2K0cxL280dTBTcjF2dG9ZMER1a3N4N1BZZ20vZjc0ajdtRjRiM3lCZEhDYVRsbHQxVURVclBEczVHWkIyd0RLQ3pEb3M3MFc3ZHZKd0xEaEFnPT0K",
+      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.3/freetoken-desktop-x86_64.AppImage"
+    },
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS2xHTmo2N0NzYXZhSFQ1ZHVQb1ZYRk9zeUl4QmtoYlNDQ3dGc0JJaVk4S2t6dERSNmZuNG5zNDFTbndIcWo0ZldQVmI4KythdUdKS0F5M2djRDBtUmdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NDUwMjgxCWZpbGU6RnJlZVRva2VuLVNldHVwLXdpbi14NjQuZXhlClNnL05RVVdLV2FuVTJzWisyVXNwc2toRWJpb1YzVlRwYjhXSEZvMU9aOElHWE1pUjZCL2JhNVZMRnpmMVhnRHdUVUJnUHBpQ1JvNzBqWmZKeWw4VkRBPT0K",
+      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.3/FreeToken-Setup-win-x64.exe"
+    }
+  }
+}
