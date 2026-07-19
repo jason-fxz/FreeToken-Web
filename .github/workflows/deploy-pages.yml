@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:                 # redeploy only when web files change
       - "index.html"
-      - "simple/**"
       - "assets/**"
       - "update/**"      # desktop updater manifests (stable.json / beta.json)
       - ".github/workflows/deploy-pages.yml"
@@ -31,6 +30,6 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .            # repo root is the site root (index.html + simple/ live at root)
+          path: .            # repo root is the site root (index.html + update/ live at root)
       - id: deployment
         uses: actions/deploy-pages@v4
