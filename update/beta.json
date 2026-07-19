@@ -1,15 +1,15 @@
 {
-  "version": "0.2.0-beta.3",
-  "notes": "## What's Changed\n- in-app software update \n- some UI fixs",
-  "pub_date": "2026-07-19T08:40:05Z",
+  "version": "0.2.0-beta.4",
+  "notes": "## What's Changed\n- [Fix] Windows: engine installer hung with no output",
+  "pub_date": "2026-07-19T10:31:31Z",
   "platforms": {
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS3Via0FBTEtmdXBDdWh2Z3Nkc0tVemFnRG1aTDF4S1g3YndzSHZmQVF4ajAxOHNjSGVENUdza2EwNmJKTWlOeUhDQ3p2WFJVN0JWSk8yRWI5VUNiY3dNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NDUwMjc5CWZpbGU6ZnJlZXRva2VuLWRlc2t0b3AteDg2XzY0LkFwcEltYWdlClhENTE2K0cxL280dTBTcjF2dG9ZMER1a3N4N1BZZ20vZjc0ajdtRjRiM3lCZEhDYVRsbHQxVURVclBEczVHWkIyd0RLQ3pEb3M3MFc3ZHZKd0xEaEFnPT0K",
-      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.3/freetoken-desktop-x86_64.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS3BEMnFDUHZ2b2kxdXc4U2VaODNUVks3SXp4dmdiak5XanovNExNUXRja1BpelpJRjNDeUViK3FXUGkzK3RxYzJsczQxQlVLVExqaWJtYXp6Uy8vK0FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NDU3MDgwCWZpbGU6ZnJlZXRva2VuLWRlc2t0b3AteDg2XzY0LkFwcEltYWdlCkkwYkZxWk8vTGp3R1JqSDBtanBwTzh3SDlSeERKUEExQ1FVQzE5NVF2Ti9jZVJHdFlxVVRlWTFMbE9xemYxYm1DTHBndGdRdHVXVDFhU1RVV0s3OUR3PT0K",
+      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.4/freetoken-desktop-x86_64.AppImage"
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS2xHTmo2N0NzYXZhSFQ1ZHVQb1ZYRk9zeUl4QmtoYlNDQ3dGc0JJaVk4S2t6dERSNmZuNG5zNDFTbndIcWo0ZldQVmI4KythdUdKS0F5M2djRDBtUmdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NDUwMjgxCWZpbGU6RnJlZVRva2VuLVNldHVwLXdpbi14NjQuZXhlClNnL05RVVdLV2FuVTJzWisyVXNwc2toRWJpb1YzVlRwYjhXSEZvMU9aOElHWE1pUjZCL2JhNVZMRnpmMVhnRHdUVUJnUHBpQ1JvNzBqWmZKeWw4VkRBPT0K",
-      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.3/FreeToken-Setup-win-x64.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS3M1S0RDeDBEYjdKRFVyUXNhWkxxemY1LzQxdmVkb2I2QkZrYjZaM0FIdk56cWQ0Z1pVN2t1ZmgxQjM4UlZsMU9jem5zWU5TSXgxODZuYVJ5QTdQN1FvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NDU3MDgxCWZpbGU6RnJlZVRva2VuLVNldHVwLXdpbi14NjQuZXhlCldsMXpETURoQmZNOE1ZcEF5d29pM1cySnZBKzdCKzNrR1BQSlFTSlVWVEtHYTFDbStXakE2YlFYL0I3T0V5TUZnWUhkbDZNeDFNQU0vd2xQYkw3NUJ3PT0K",
+      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.4/FreeToken-Setup-win-x64.exe"
     }
   }
 }
