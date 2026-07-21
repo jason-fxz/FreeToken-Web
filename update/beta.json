@@ -1,19 +1,19 @@
 {
-  "version": "0.2.0-beta.5",
-  "notes": "## What's Changed\n- [Feat] deb installs now self-update in-app (downloads the .deb, installs via pkexec)\n- [Feat] update card renders release notes as Markdown\n- [Fix] updater resolves the package matching the install channel — no more downloading the wrong format\n- [Change] site and update endpoints moved to freetoken.flashml.ai",
-  "pub_date": "2026-07-20T04:59:28Z",
+  "version": "0.2.0-beta.6",
+  "notes": "## What's Changed\n\n- [Fix] DSV4 Cache config\n- [Feat] Server log keeps the launch command and startup output for crash reports\n- [Fix] A refused chat request (usually a prompt longer than the context) says so instead of leaving an empty reply\n- [Fix] Stopping a model no longer pops a false \"engine failure\" dialog",
+  "pub_date": "2026-07-21T08:57:58Z",
   "platforms": {
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS2h4T2ZhajZsR3dBa3R5cTE2cGtycUtJZmgremFPNTJzako4aE9qb2w3cEVxck9PZ0E5bW0rblJqdk5jWWkvSWY4eWtmMm04VGJxMHU2SkZTT3NTa2dJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NTIzNTU0CWZpbGU6ZnJlZXRva2VuLWRlc2t0b3AteDg2XzY0LkFwcEltYWdlCm4wdGlGV0NNOEZUNEF2WHhzTWJJeTRkczI2MjEyb0VQamtHQ3ZoUTc5UHowY0UvZnplU2YzTFhLOVJ0aU5DZ2x0OXFwQ3FJRVo3N2FpWWZzZ2lndUF3PT0K",
-      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.5/freetoken-desktop-x86_64.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS3JmTW1IanRXKzR5eFpoZU1ScEJ4dkdsZUt4QWtCOUdjTUI0bUVkb0c5UVRlUTNpYjFYbkViK3NOL1pCbUtqNnI5QUV1aEdGQ2d5ZE00cktzT3cwVXdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NjI0MjYyCWZpbGU6ZnJlZXRva2VuLWRlc2t0b3AteDg2XzY0LkFwcEltYWdlCkxDbnIveFNIT3ZUMnM4NWs3SnpHeGZOWlEvVjMwT01raGs0Szk4MGo0dVF3cXhyRk4xd0hyMTNqYzRyT2V2aDJFYkdSNE11a2NVRGo3KzRWTXh4bkNRPT0K",
+      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.6/freetoken-desktop-x86_64.AppImage"
     },
     "linux-x86_64-deb": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS2x3UmcrUC8zSEtzdWM3MjRaUldFR0I2R3FZdytKZDN4OHB6UHBsbHBYVGZSM05ld1VDVW55bjF3ZzNpVlBsYkprS2RvY3ZvdTFJY2tybkE3VjZESmdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NTIzNTU2CWZpbGU6ZnJlZXRva2VuLWRlc2t0b3AtYW1kNjQuZGViCjI0TVNhT2cxemk4c295dldQZk1JQUFTYTdpaDBIOERCYmtIOVVvbW5iUEs5WWJGKzNwSW11TkhTUjJEMStYaThSTkhJeHJvRkcwU2NLRklXckRINUJ3PT0K",
-      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.5/freetoken-desktop-amd64.deb"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS2xHczdQaHpaNmE2TVFZR2ZYUDFNTjNmZFRxK1U4alRnUmMxbEpBcUk0aHpTekliQ1NsQ2hLWngyZDJtdUVsWnlOMzFYbXhNSFQyajZsQ3hMREpYeVFJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NjI0MjY1CWZpbGU6ZnJlZXRva2VuLWRlc2t0b3AtYW1kNjQuZGViCkt0Sm5DcDAyMFBOdGF3dmxoamZYNlNHaFVNS0lNa0xhZm1KcFJzREhkZFRNT1czL0hEeEQvOTRtQ0hJU1FkQlVmcWZ5a1hXSHhPcHI4Y2NobnN6WEJ3PT0K",
+      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.6/freetoken-desktop-amd64.deb"
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS2xjRGlIWFRsYlJpU2NiOVQrOGdUclJUQzFzSmttakVBOUw4ZHJ6OHp0b3JrTHd4d0duWFY1c3ZVNWxpcWlrV0ZtOFBFWVVsWUlyT2VGVVNLTWNiREFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NTIzNTU1CWZpbGU6RnJlZVRva2VuLVNldHVwLXdpbi14NjQuZXhlCk9rNXAwVjJlUEo4ekFzQ0NwT0hFZ2I1ZExJbWZpbXNHUEhEK2Jsa09SRmltQ0kvOFZrSG5BSEpkMEdvK2lOcHAwb0MzdGMwZ1l6R3dFUXNqdTV5b0JnPT0K",
-      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.5/FreeToken-Setup-win-x64.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUQU1YOWYvbExrS2t2aGdMd3RtS0g4bG4xMTZuYWg4VHJQZGhnUU1Cb0JDSjRnVER0Zm9CdzdNdlJqcUNEQmY3UzNIMEdBamp4MEdFSmNaNk1raEd6TXdCSXdEZ3ZRcndFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NjI0MjYzCWZpbGU6RnJlZVRva2VuLVNldHVwLXdpbi14NjQuZXhlCndGbnQ2QndsVEo3SVQxUlc5Ym9vL25OKzJpaFNvenhCRlhmbXA2M2xPK0hlZ1BlTmQ0MnZjUVZZM2wveVhtMWQwNjZNV0RTazIyT3NKQ1ZRazV2NUJ3PT0K",
+      "url": "https://github.com/jason-fxz/FreeToken-Web/releases/download/v0.2.0-beta.6/FreeToken-Setup-win-x64.exe"
     }
   }
 }
